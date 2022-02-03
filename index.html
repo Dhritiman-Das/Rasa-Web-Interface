@@ -4,23 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <script src="eventFunctions.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script src="scripts/script.js"></script>
+    <script src="scripts/actionsEventFunctions.js"></script>
+    <script src="scripts/intentEventFunctions.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Capri</title>
 </head>
 <body>
-    <div class="div3 actionBlock">
-        <div class="div4 action">Action : </div>
-        <div class="div4 chooseAdd"> 
-            <select name="Choose or Add actions" id="chooseActions" class="div5 chooseActions" onclick="selectedAction(this);">
-                <option value="Select" style="display:none;" selected>Select</option>
-                <option value="chooseAction">Choose an action</option>
-                <option value="utter">Utter Something</option>
-                <option value="slotFilling">Fill a Slot</option>
-                <option value="writeCustomAction">Write a custom action</option>
-            </select>
-            <!-- <div class="div4 clear"><button onclick="removeDiv(this)">Delete</button></div> -->
+    <div class="div1 storyBlock">
+        <div class="div2 intent">
+            <div class="div3 intentDiv">
+                <div class="div4">Intent: </div>
+                <div class="div4">
+                    <select name="Choose or Add Intent" id="chooseIntent" class="div5 intentList" onclick="selectedIntent(this);">
+                        <option value="Select" style="display:none;" selected>Select</option>
+                        <option value="Create new Intent" onclick="createNewIntent(this)">Create new Intent</option>
+                    </select>
+                </div>
+            </div>
+            <div class="newIntentDiv" style="display: none;">
+                <div class="div3 intentNameDiv">
+                    <div class="div4">Intent Name: </div>
+                    <div class="div4"><input type="text"></div>
+                </div>
+                <div class="div3 examplesDiv">
+                    <div class="div4">Examples: </div>
+                    <div class="div4">
+                        <div class="div5"><textarea name="intentExamples" id="" cols="30" rows="10"></textarea></div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+        <div class="div2 actions">
+            <div class="div3 actionBlock">
+                <div class="div4 action">Action : </div>
+                <div class="div4 chooseAdd"> 
+                    <select name="Choose or Add actions" id="chooseActions" class="div5 chooseActions" onclick="selectedAction(this);">
+                        <option value="Select" style="display:none;" selected>Select</option>
+                        <option value="chooseAction">Choose an action</option>
+                        <option value="utter">Utter Something</option>
+                        <option value="slotFilling">Fill a Slot</option>
+                        <option value="writeCustomAction">Write a custom action</option>
+                    </select>
+                    <!-- <div class="div4 clear"><button onclick="removeDiv(this)">Delete</button></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="div2">
+            <div class="tick">
+                <button onclick="">Tick</button>
+            </div>
         </div>
     </div>
 </body>

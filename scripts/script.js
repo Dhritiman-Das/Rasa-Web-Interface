@@ -21,8 +21,6 @@ function listToOptions(list, name, id, func = null) {
   return select;
 }
 
-console.log(listToOptions(slots, "slots", "slots"));
-
 function generateID() {
   return Math.random().toString(36).slice(2);
 }
