@@ -1,6 +1,3 @@
-var slots = ["appt_date", "appt_time", "creditScore", "Shading"];
-var entities = ["time", "money", "number"];
-
 function listToOptions(list, name, id, func = null) {
   var select = document.createElement("select");
   select.name = name;
