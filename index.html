@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <script src="eventFunctions.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Capri</title>
+</head>
+<body>
+    <div class="div3 actionBlock">
+        <div class="div4 action">Action : </div>
+        <div class="div4 chooseAdd"> 
+            <select name="Choose or Add actions" id="chooseActions" class="div5 chooseActions" onclick="selectedAction(this);">
+                <option value="Select" style="display:none;" selected>Select</option>
+                <option value="chooseAction">Choose an action</option>
+                <option value="utter">Utter Something</option>
+                <option value="slotFilling">Fill a Slot</option>
+                <option value="writeCustomAction">Write a custom action</option>
+            </select>
+            <!-- <div class="div4 clear"><button onclick="removeDiv(this)">Delete</button></div> -->
+        </div>
+    </div>
+</body>
+</html>
