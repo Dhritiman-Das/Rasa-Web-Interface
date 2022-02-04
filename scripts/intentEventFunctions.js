@@ -24,3 +24,9 @@ function selectedIntent(x) {
 function createNewIntent(x) {
   document;
 }
+
+function addIntentBlock(x) {
+  var intentBlock = x.parentElement.parentElement;
+  // x.parentElement.parentElement.parentElement.appendChild(intentBlock);
+  console.log(intentBlock.parentElement);
+}
