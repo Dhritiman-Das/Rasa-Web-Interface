@@ -93,15 +93,4 @@ function checkIfLastEntity(x) {
 function removeDiv(x) {
   console.log(x.parentElement.parentElement);
   x.parentElement.parentElement.remove();
-  // console.log(x.parentElement.parentElement);
-  // console.log(x.parentElement.parentElement.classList.contains("slot"));
-  // toBeDeleted = x.parentElement.parentElement;
-  // console.log(toBeDeleted);
-  // if (toBeDeleted.classList.contains("slot")) {
-  //   while (document.getElementsByClassName("slot").length > 0) {
-  //     document.getElementsByClassName("slot")[0].remove();
-  //   }
-  // }
 }
-
-//tomorrow's task: on clicking `Extract from last intent` the checkIfLastEntity() should run only once and once `Set a custom value` is clicked, it should delete the Entity Type: fillup
