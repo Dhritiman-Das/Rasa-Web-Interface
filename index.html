@@ -12,6 +12,9 @@
     <title>Capri</title>
 </head>
 <body>
+    <div class="start">
+        <button onclick="refreshValues()">START</button>
+    </div>
     <div class="alphaDiv">
         <div class="divCheckpoint">
             <div class="div1 checkPointTop">
@@ -29,6 +32,9 @@
                                         <option value="Create new Intent" onclick="createNewIntent(this)">Create new Intent</option>
                                     </select>
                                 </div>
+                                <div class="div4 addDiv">
+                                    <button onclick="createNewIntent(this)">FRESH INTENT</button>
+                                </div>
                             </div>
                             <div class="newIntentDiv" style="display: none;">
                                 <div class="div3 intentNameDiv">
@@ -40,6 +46,9 @@
                                     <div class="div4">
                                         <div class="div5"><textarea name="intentExamples" id="" cols="30" rows="10"></textarea></div>
                                     </div>                
+                                </div>
+                                <div class="div3 removeIntentExamples">
+                                    <button onclick="removeIntentExamples(this)">Remove</button>
                                 </div>
                             </div>
                         </div>

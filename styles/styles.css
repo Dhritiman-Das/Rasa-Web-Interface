@@ -1,3 +1,8 @@
 .selectEntityType {
   display: none;
 }
+
+.singleIntentDiv {
+  background-color: rgb(170, 221, 221);
+  margin: 10px 0;
+}

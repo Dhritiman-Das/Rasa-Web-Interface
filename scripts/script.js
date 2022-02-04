@@ -21,3 +21,5 @@ function listToOptions(list, name, id, func = null) {
 function generateID() {
   return Math.random().toString(36).slice(2);
 }
+
+function refreshValues() {}
