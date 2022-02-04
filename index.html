@@ -19,26 +19,33 @@
             </div>
             <div class="div1 storyBlock">
                 <div class="div2 intent">
-                    <div class="div3 intentDiv">
-                        <div class="div4">Intent: </div>
-                        <div class="div4">
-                            <select name="Choose or Add Intent" id="chooseIntent" class="div5 intentList" onclick="selectedIntent(this);">
-                                <option value="Select" style="display:none;" selected>Select</option>
-                                <option value="Create new Intent" onclick="createNewIntent(this)">Create new Intent</option>
-                            </select>
+                    <div class="intentDiv">
+                        <div class="singleIntentDiv">
+                            <div class="div3 chooseIntentDiv">
+                                <div class="div4">Intent: </div>
+                                <div class="div4">
+                                    <select name="Choose or Add Intent" id="chooseIntent" class="div5 intentList" onclick="selectedIntent(this);">
+                                        <option value="Select" style="display:none;" selected>Select</option>
+                                        <option value="Create new Intent" onclick="createNewIntent(this)">Create new Intent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="newIntentDiv" style="display: none;">
+                                <div class="div3 intentNameDiv">
+                                    <div class="div4">Intent Name: </div>
+                                    <div class="div4"><input type="text"></div>
+                                </div>
+                                <div class="div3 examplesDiv">
+                                    <div class="div4">Examples: </div>
+                                    <div class="div4">
+                                        <div class="div5"><textarea name="intentExamples" id="" cols="30" rows="10"></textarea></div>
+                                    </div>                
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="newIntentDiv" style="display: none;">
-                        <div class="div3 intentNameDiv">
-                            <div class="div4">Intent Name: </div>
-                            <div class="div4"><input type="text"></div>
-                        </div>
-                        <div class="div3 examplesDiv">
-                            <div class="div4">Examples: </div>
-                            <div class="div4">
-                                <div class="div5"><textarea name="intentExamples" id="" cols="30" rows="10"></textarea></div>
-                            </div>                
-                        </div>
+                    <div class="orButton">
+                        <button  onclick="addIntentBlock(this)">OR</button>
                     </div>
                 </div>
                 <div class="div2 actions">
