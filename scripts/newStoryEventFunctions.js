@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="scripts/script.js"></script>
-    <script src="scripts/dataBaseDummy.js"></script>
-    <script src="scripts/actionsEventFunctions.js"></script>
-    <script src="scripts/intentEventFunctions.js"></script>
-    <script src="scripts/newStoryEventFunctions.js"></script>
-    <link rel="stylesheet" href="styles/styles.css">
-    <title>Capri</title>
-</head>
-<body>
-    <div class="start">
-        <button onclick="refreshValues()">START</button>
-    </div>
-    <div class="alphaDiv">
-        <div class="divCheckpoint">
+function createNewStoryBlock(x) {
+  const newStoryBlock = document.createElement("div");
+  newStoryBlock.className = "alphaDiv";
+  newStoryBlock.innerHTML = `
+  <div class="divCheckpoint">
             <div class="div1 checkPointTop">
                 <button></button>
             </div>
@@ -83,6 +68,7 @@
                 <button onclick="createNewStoryBlock(this)">Checkpoint</button>
             </div>
         </div>
-    </div>
-</body>
-</html>
+  `;
+  x.parentElement.parentElement.parentElement.append(newStoryBlock);
+  console.log(x.parentElement.parentElement.parentElement);
+}

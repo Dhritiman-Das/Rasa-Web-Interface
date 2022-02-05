@@ -1,6 +1,7 @@
 function selectedIntent(x) {
+  console.log("select is being clicked");
   console.log(x.children.length);
-  if (x.children.length == 2) {
+  if (x.children.length == 1) {
     select = x;
     for (const val of intents) {
       option = document.createElement("option");
@@ -18,6 +19,7 @@ function selectedIntent(x) {
 }
 
 function createNewIntent(x) {
+  x.parentElement.parentElement.children[1].children[0].value = "Select";
   x.parentElement.parentElement.parentElement.children[1].style.display =
     "block";
 }
@@ -31,11 +33,13 @@ function addIntentBlock(x) {
   <div class="div4">
       <select name="Choose or Add Intent" id="chooseIntent" class="div5 intentList" onclick="selectedIntent(this);">
           <option value="Select" style="display:none;" selected>Select</option>
-          <option value="Create new Intent" onclick="createNewIntent(this)">Create new Intent</option>
       </select>
   </div>
   <div class="div4 addDiv">
       <button onclick="createNewIntent(this)">FRESH INTENT</button>
+  </div>
+  <div class="div4 deleteDiv">
+    <button onclick="removeDiv(this)">DELETE INTENT</button>
   </div>
 </div>
 <div class="newIntentDiv" style="display: none;">
