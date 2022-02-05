@@ -1,8 +1,25 @@
 .selectEntityType {
   display: none;
 }
-
+.alphaDiv {
+  display: table-cell;
+  /* width: 600px; */
+}
+.divCheckpoint {
+  width: 250px;
+}
 .singleIntentDiv {
   background-color: rgb(170, 221, 221);
+  margin: 10px 0;
+}
+.intent {
+  border-style: ridge;
+}
+.actions {
+  border-style: ridge;
+}
+.utteranceBlock,
+.slotDiv {
+  background-color: rgb(218, 174, 174);
   margin: 10px 0;
 }
