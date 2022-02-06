@@ -1,9 +1,21 @@
 function createNewStoryBlock(x) {
+  if (x.className == "atTheMiddle") {
+    if (x.parentElement.id) {
+      console.log("ID found");
+      var checkpointName = x.parentElement.id;
+    } else {
+      console.log("ID not found");
+      var checkpointName = "checkpoint_" + generateID(); //generates a random checkpoint name
+      x.parentElement.id = checkpointName;
+    }
+  } else if (x.className == "atTheStart") {
+    var checkpointName = "null";
+  }
   const newStoryBlock = document.createElement("div");
   newStoryBlock.className = "alphaDiv";
   newStoryBlock.innerHTML = `
   <div class="divCheckpoint">
-            <div class="div1 checkPointTop">
+            <div id = ${checkpointName} class="div1 checkPointTop">
                 <button></button>
             </div>
             <div class="div1 storyBlock">
@@ -65,10 +77,23 @@ function createNewStoryBlock(x) {
                 </div>
             </div>
             <div class="div1 checkPointBottom">
-                <button onclick="createNewStoryBlock(this)">Checkpoint</button>
+                <button class = "atTheMiddle" onclick="createNewStoryBlock(this)">Checkpoint</button>
             </div>
         </div>
   `;
-  x.parentElement.parentElement.parentElement.append(newStoryBlock);
-  console.log(x.parentElement.parentElement.parentElement);
+  if (x.className == "atTheMiddle") {
+    x.parentElement.parentElement.parentElement.append(newStoryBlock);
+    console.log(x.parentElement.parentElement.parentElement);
+    if (x.parentElement.id) {
+      console.log("ID found");
+    } else {
+      console.log("ID not found");
+      x.parentElement.id = "checkpoint_" + generateID(); //generates a random checkpoint name
+    }
+  } else if (x.className == "atTheStart") {
+    console.log(x.parentElement.parentElement);
+    x.parentElement.parentElement.append(newStoryBlock);
+  } else {
+    console.log("unregistered");
+  }
 }

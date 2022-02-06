@@ -37,7 +37,7 @@ function selectedAction(x) {
     slotSelected(parentDiv);
   } else if (x.value == "writeCustomAction") {
   }
-  document.getElementById("chooseActions").value = "Select";
+  x.value = "Select";
 }
 
 function slotSelected(parentDiv) {
