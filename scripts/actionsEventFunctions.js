@@ -45,6 +45,7 @@ function slotSelected(parentDiv) {
   var newDiv = document.createElement("div");
   newDiv.className = "div3 entitiesBlock slot";
   entitiesToOptions = listToOptions(entities, "entities", "entities");
+  entitiesToOptions.className = "entityName";
   newDiv.innerHTML = `
                   <div class="div4 type">Entity type : </div>
                   <div class="div4">

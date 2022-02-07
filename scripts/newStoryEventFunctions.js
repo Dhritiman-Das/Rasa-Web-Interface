@@ -96,4 +96,7 @@ function createNewStoryBlock(x) {
   } else {
     console.log("unregistered");
   }
+  makeArrows(x, newStoryBlock.children[0].children[0]);
+  console.log(newStoryBlock.children[0].children[0].getBoundingClientRect());
+  console.log(makeArrows(x, newStoryBlock.children[0].children[0]));
 }
