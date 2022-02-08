@@ -21,5 +21,20 @@ function listToOptions(list, name, id, func = null) {
 function generateID() {
   return Math.random().toString(36).slice(2);
 }
-console.log(`checkpointss_${generateID()}`);
-function refreshValues() {}
+
+function getEntitiesString() {
+  emptyString = "";
+  for (const entitiy of entities) {
+    emptyString = emptyString.concat(`  - ${entitiy} \n`);
+  }
+  return emptyString;
+}
+function getSlotsString() {
+  emptyString = "";
+  for (const slot of slots) {
+    emptyString = emptyString.concat(`  ${slot} \n`);
+    emptyString = emptyString.concat(`    type: text \n`);
+    emptyString = emptyString.concat(`    influence_conversation: false\n`);
+  }
+  return emptyString;
+}

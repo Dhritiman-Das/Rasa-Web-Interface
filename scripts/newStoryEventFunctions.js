@@ -17,6 +17,7 @@ function createNewStoryBlock(x) {
   <div class="divCheckpoint">
             <div id = ${checkpointName} class="div1 checkPointTop">
                 <button></button>
+                <button onclick="deleteStoryBlock(this)">DELETE BLOCK</button>
             </div>
             <div class="div1 storyBlock">
                 <div class="div2 intent">
@@ -99,4 +100,8 @@ function createNewStoryBlock(x) {
   makeArrows(x, newStoryBlock.children[0].children[0]);
   console.log(newStoryBlock.children[0].children[0].getBoundingClientRect());
   console.log(makeArrows(x, newStoryBlock.children[0].children[0]));
+}
+
+function deleteStoryBlock(x) {
+  x.parentElement.parentElement.parentElement.remove();
 }
