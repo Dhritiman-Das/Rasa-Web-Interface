@@ -4,9 +4,11 @@ function generateStories() {
     intentString: "intents: \n",
     entitiesString: "entities: \n",
     slotsString: "slots: \n",
-    responsesString: "",
-    actionsString: "",
+    responsesString: "responses: \n",
+    actionsString: "actions: \n",
   };
+  intentList = [];
+  actionList = [];
   //domain.yml: entities
   domainString.entitiesString = domainString.entitiesString.concat(
     getEntitiesString()
@@ -55,20 +57,24 @@ function generateStories() {
         );
       }
     }
-    //domain.yml: intents
-    domainString.intentString = domainString.intentString.concat(
-      `  - ${intentName} \n`
-    );
+    intentList.push(intentName);
     //actions
     for (const actionsDiv of dummyDiv.children[1].children[1].children) {
       //utterance
       if (actionsDiv.classList.contains("utteranceBlock")) {
         utter_id = "utter_" + generateID();
         actionsDiv.id = utter_id; //naming the utter_id
+        actionList.push(utter_id);
         //stories.yml
         storiesString = storiesString.concat(`- action: ${utter_id} \n`);
-        //domain.yml
+        //domain.yml: responses
         utteranceText = actionsDiv.children[1].children[0].value;
+        domainString.responsesString = domainString.responsesString.concat(
+          `  ${utter_id} \n`
+        );
+        domainString.responsesString = domainString.responsesString.concat(
+          `    - text: ${utteranceText} \n`
+        );
       }
       //slot
       else if (actionsDiv.classList.contains("slotDiv")) {
@@ -82,15 +88,17 @@ function generateStories() {
           entityValue = entityExamples[entityName];
           //AND ALSO ADD entities: - time: "2021-10-11T00:00:00.000-07:00" AFTER intent
         }
+        slotFillActionName = `action_fill_${slotName}_slot`;
         //stories.yml
         storiesString = storiesString.concat(
-          `- action: action_fill_${slotName}_slot \n`
+          `- action: ${slotFillActionName} \n`
         );
         storiesString = storiesString.concat(`- slot_was_set: \n`);
         storiesString = storiesString.concat(
           `  - ${slotName}: ${entityValue} \n`
         );
         //domain.yml
+        actionList.push(slotFillActionName);
       }
     }
     //checkpointBOTTOM
@@ -101,7 +109,22 @@ function generateStories() {
       );
     }
   }
+  //domain.yml: intents
+  intentListUnique = getUnique(intentList);
+  for (const intent of intentListUnique) {
+    domainString.intentString = domainString.intentString.concat(
+      `  - ${intent} \n`
+    );
+  }
+  //domain.yml: actions
+  actionListUnique = getUnique(actionList);
+  for (const action of actionListUnique) {
+    domainString.actionsString = domainString.actionsString.concat(
+      `  - ${action} \n`
+    );
+  }
   console.log(storiesString);
+  console.log(domainString.intentString);
 }
 
 // intents:

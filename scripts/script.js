@@ -38,3 +38,7 @@ function getSlotsString() {
   }
   return emptyString;
 }
+function getUnique(arr) {
+  var uniqueArray = Array.from(new Set(arr));
+  return uniqueArray;
+}
