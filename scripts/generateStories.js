@@ -123,12 +123,16 @@ function generateStories() {
       `  - ${action} \n`
     );
   }
-  console.log(storiesString);
-  console.log(domainString.intentString);
+  //domain.yml: complete file
+  domainFile = `version: "2.0"
+  session_config:
+    session_expiration_time: 0
+    carry_over_slots_to_new_session: true \n`;
+  domainFile = domainFile
+    .concat(domainString.intentString)
+    .concat(domainString.entitiesString)
+    .concat(domainString.slotsString)
+    .concat(domainString.actionsString)
+    .concat(domainString.responsesString);
+  document.getElementsByClassName("storiesYML")[0] = domainFile;
 }
-
-// intents:
-//   - Positive
-//   - Positive
-//   - Negative
-//   Write a function to remove the duplicates in domain.yml:intents
