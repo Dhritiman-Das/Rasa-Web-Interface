@@ -1,10 +1,8 @@
 function createNewStoryBlock(x) {
   if (x.className == "atTheMiddle") {
     if (x.parentElement.id) {
-      console.log("ID found");
       var checkpointName = x.parentElement.id;
     } else {
-      console.log("ID not found");
       var checkpointName = "checkpoint_" + generateID(); //generates a random checkpoint name
       x.parentElement.id = checkpointName;
     }
@@ -84,15 +82,11 @@ function createNewStoryBlock(x) {
   `;
   if (x.className == "atTheMiddle") {
     x.parentElement.parentElement.parentElement.append(newStoryBlock);
-    console.log(x.parentElement.parentElement.parentElement);
     if (x.parentElement.id) {
-      console.log("ID found");
     } else {
-      console.log("ID not found");
       x.parentElement.id = "checkpoint_" + generateID(); //generates a random checkpoint name
     }
   } else if (x.className == "atTheStart") {
-    console.log(x.parentElement.parentElement);
     x.parentElement.parentElement.append(newStoryBlock);
   } else {
     console.log("unregistered");
