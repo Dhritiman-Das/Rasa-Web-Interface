@@ -1,6 +1,4 @@
 function selectedIntent(x) {
-  console.log("select is being clicked");
-  console.log(x.children.length);
   if (x.children.length == 1) {
     select = x;
     for (const val of intents) {

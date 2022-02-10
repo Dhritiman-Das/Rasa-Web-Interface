@@ -134,5 +134,8 @@ function generateStories() {
     .concat(domainString.slotsString)
     .concat(domainString.actionsString)
     .concat(domainString.responsesString);
-  document.getElementsByClassName("storiesYML")[0] = domainFile;
+  console.log("stories.yml File");
+  console.log(storiesString);
+  console.log("domain.yml File");
+  console.log(domainFile);
 }
