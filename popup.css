@@ -1,0 +1,23 @@
+.topnav,
+.intentHeader,
+.singleExample {
+  display: inline-flex;
+}
+.popupLink {
+  padding-right: 20px;
+}
+i {
+  padding: 0 20px;
+}
+.singleExample {
+  background-color: bisque;
+}
+.singleExample {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
+.intentHeader {
+  justify-content: space-between;
+  width: 200px;
+}
