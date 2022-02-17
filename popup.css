@@ -12,7 +12,8 @@ i {
 .singleExample {
   background-color: bisque;
 }
-.singleExample {
+.singleExample,
+.inputNewExample {
   display: flex;
   width: 200px;
   justify-content: space-between;
@@ -20,4 +21,13 @@ i {
 .intentHeader {
   justify-content: space-between;
   width: 200px;
+}
+.inputBox {
+  width: 60%;
+}
+input {
+  width: 100%;
+}
+.iconDiv {
+  width: 15%;
 }
