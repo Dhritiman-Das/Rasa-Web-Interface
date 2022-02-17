@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./popup.js" defer></script>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="topnav">
+        <div class="popupLink">Intents</div>
+        <div class="popupLink">Slots</div>
+        <div class="popupLink">Endpoints</div>
+    </div>
+    <div class="popupDiv">
+        <div class="popup intentPopup">
+            <div class="intentMain">
+                <div class="intentHeader">
+                    <div class="intentName">Intent Name</div>
+                    <div class="iconDiv"><i class="fa fa-solid fa-angle-down showMore"></i></div>
+                    <div class="iconDiv"><i class="fa fa-trash deleteIntent"></i></div>
+                </div>
+                <div class="intentExamples">
+                    <div class="examples">
+                        <div class="singleExample">
+                            <div class="exampleName">Example Name 1</div>
+                            <div class="iconDiv"><i class="fa fa-trash deleteExample"></i></div>
+                        </div>
+                        <div class="singleExample">
+                            <div class="exampleName">Example Name 2</div>
+                            <div class="iconDiv"><i class="fa fa-trash deleteExample"></i></div>
+                        </div>
+                    </div>
+                    <div class="addIntentExamples">
+                        <div class="AddMore"><button>ADD MORE</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup slotsPopup"></div>
+        <div class="popup endpointsPopup"></div>
+    </div>
+</body>
+</html>
