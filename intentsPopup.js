@@ -1,63 +1,22 @@
+//Database replica
 const intentsDB = {
   intents: {
     Positive: ["Yes", "Yup", "Sure"],
     Negative: ["No", "Never"],
   },
 };
+//activate Intent popup
+function intentActivated(x) {
+  document.getElementsByClassName("intentPopup")[0].style.display = "block";
+  document.getElementsByClassName("intentTopNav")[0].className = "active";
+  document.getElementsByClassName("slotsTopNav")[0].classList.remove("active");
+  document
+    .getElementsByClassName("endpointTopNav")[0]
+    .classList.remove("active");
+}
 
 for (var intent in intentsDB.intents) {
-  var intentHeader = document.createElement("div");
-  intentHeader.className = "intentHeader";
-  var intentName = intent;
-  intentHeader.innerHTML = `
-  <div class="intentName">${intent}</div>
-  <div class="iconDiv"><i class="fa fa-angle-down showMore" onclick="maximizeMinimizeIntent(this)"></i></div>
-  <div class="iconDiv"><i class="fa fa-trash deleteIntent" onclick="deleteIntentWhole(this)"></i></div>
-  `;
-
-  var intentExamples = document.createElement("div");
-  intentExamples.className = "intentExamples";
-  intentExamples.style.display = "none";
-  var examplesHTML = `
-  <div class="examples">
-  `;
-  for (var eg = 0; eg < intentsDB.intents[intent].length; eg++) {
-    var intentEg = intentsDB.intents[intent][eg];
-    console.log(intentEg);
-    examplesHTML += `
-    <div class="singleExample">
-    <div class="exampleName">${intentEg}</div>
-    <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
-    </div>
-    `;
-  }
-  examplesHTML += `
-  </div>
-  <div class="inputNewExample" style="display: none;">
-      <div class="inputBox">
-          <input type="text">
-      </div>
-      <div class="iconDiv">
-          <i class="fa fa-check addExample" onclick="newExampleBlockDone(this)"></i>
-      </div>
-      <div class="iconDiv">
-          <i class="fa fa-minus minimizeExample" onclick="newExampleBlockHide(this)"></i>
-      </div>
-  </div>
-  <div class="addIntentExamples">
-  <div class="AddMore"><button onclick="newExampleBlockShow(this)">ADD MORE</button></div>
-  </div>
-  `;
-  //   console.log(examplesHTML);
-  intentExamples.innerHTML = examplesHTML;
-  console.log(intentHeader);
-  var intentMain = document.createElement("div");
-  intentMain.className = "intentMain";
-  intentMain.append(intentHeader);
-  intentMain.append(intentExamples);
-
-  document.getElementsByClassName("intentPopup")[0].append(intentMain);
-  // document.getElementsByClassName("intentPopup")[0].append(intentExamples);
+  makeTheIntentBlock(intent);
 }
 
 function newExampleBlockShow(x) {
@@ -80,7 +39,7 @@ function newExampleBlockDone(x) {
     var newSingleExample = `
     <div class="singleExample">
          <div class="exampleName">${newExampleValue}</div>
-         <div class="iconDiv"><i class="fa fa-trash deleteExample"></i></div>
+         <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
     </div>
     `;
     x.parentElement.parentElement.parentElement.getElementsByClassName(
@@ -164,4 +123,90 @@ function minMaxIntentForm(x) {
       "newIntentForm"
     )[0].style.display = "none";
   }
+}
+
+function submitIntentForm(x) {
+  var intentName =
+    x.parentElement.parentElement.getElementsByClassName("fillIntentName")[0]
+      .children[1].value;
+  var intentExampleText =
+    x.parentElement.parentElement.getElementsByClassName(
+      "fillIntentExamples"
+    )[0].children[0].value;
+  var intentArr = convertTextToList(intentExampleText);
+  intentsDB.intents[intentName] = [];
+  for (var intentEx of intentArr) {
+    intentsDB.intents[intentName].push(intentEx);
+  }
+  //To display the intent, create the HTML block. Another option is to reload the page, but that would take some time
+  makeTheIntentBlock(intentName);
+  //clear the input and textarea
+  x.parentElement.parentElement.getElementsByClassName(
+    "fillIntentName"
+  )[0].children[1].value = "";
+  x.parentElement.parentElement.getElementsByClassName(
+    "fillIntentExamples"
+  )[0].children[0].value = "";
+}
+
+//basic functions
+function convertTextToList(text) {
+  var arr = text.split("\n");
+  return arr;
+}
+
+//This function takes in the intent name and creates the .intentMain div from the intentsDB
+function makeTheIntentBlock(intent) {
+  var intentHeader = document.createElement("div");
+  intentHeader.className = "intentHeader";
+  var intentName = intent;
+  intentHeader.innerHTML = `
+  <div class="intentName">${intentName}</div>
+  <div class="iconDiv"><i class="fa fa-angle-down showMore" onclick="maximizeMinimizeIntent(this)"></i></div>
+  <div class="iconDiv"><i class="fa fa-trash deleteIntent" onclick="deleteIntentWhole(this)"></i></div>
+  `;
+
+  var intentExamples = document.createElement("div");
+  intentExamples.className = "intentExamples";
+  intentExamples.style.display = "none";
+  var examplesHTML = `
+  <div class="examples">
+  `;
+  for (var eg = 0; eg < intentsDB.intents[intent].length; eg++) {
+    var intentEg = intentsDB.intents[intent][eg];
+    console.log(intentEg);
+    examplesHTML += `
+    <div class="singleExample">
+    <div class="exampleName">${intentEg}</div>
+    <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
+    </div>
+    `;
+  }
+  examplesHTML += `
+  </div>
+  <div class="inputNewExample" style="display: none;">
+      <div class="inputBox">
+          <input type="text">
+      </div>
+      <div class="iconDiv">
+          <i class="fa fa-check addExample" onclick="newExampleBlockDone(this)"></i>
+      </div>
+      <div class="iconDiv">
+          <i class="fa fa-minus minimizeExample" onclick="newExampleBlockHide(this)"></i>
+      </div>
+  </div>
+  <div class="addIntentExamples">
+  <div class="AddMore"><button onclick="newExampleBlockShow(this)">ADD MORE</button></div>
+  </div>
+  `;
+  //   console.log(examplesHTML);
+  intentExamples.innerHTML = examplesHTML;
+  console.log(intentHeader);
+  var intentMain = document.createElement("div");
+  intentMain.className = "intentMain";
+  intentMain.append(intentHeader);
+  intentMain.append(intentExamples);
+
+  document.getElementsByClassName("intentPopup")[0].append(intentMain);
+  // document.getElementsByClassName("intentPopup")[0].append(intentExamples);
 }
