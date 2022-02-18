@@ -31,3 +31,12 @@ input {
 .iconDiv {
   width: 15%;
 }
+.intentPopup {
+  width: 250px;
+}
+.addNewIntent {
+  text-align: right;
+}
+.active {
+  background-color: aquamarine;
+}
