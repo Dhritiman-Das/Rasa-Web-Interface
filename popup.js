@@ -149,3 +149,19 @@ function deleteIntentExample(x) {
   console.log(intentsDB);
   x.parentElement.parentElement.remove();
 }
+
+function minMaxIntentForm(x) {
+  if (x.classList.contains("fa-plus")) {
+    x.classList.remove("fa-plus");
+    x.classList.add("fa-minus");
+    x.parentElement.parentElement.getElementsByClassName(
+      "newIntentForm"
+    )[0].style.display = "block";
+  } else if (x.classList.contains("fa-minus")) {
+    x.classList.remove("fa-minus");
+    x.classList.add("fa-plus");
+    x.parentElement.parentElement.getElementsByClassName(
+      "newIntentForm"
+    )[0].style.display = "none";
+  }
+}
