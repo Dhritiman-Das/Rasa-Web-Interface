@@ -2,11 +2,20 @@ var slots = intentsDB.slots;
 
 //activate slots popup
 function slotsActivated(x) {
+  //open slots popup and close all other popups
   document.getElementsByClassName("slotsPopup")[0].style.display = "block";
   document.getElementsByClassName("intentPopup")[0].style.display = "none";
-  //add this for endpointsPopup also
+  document.getElementsByClassName("actionsPopup")[0].style.display = "none";
+  document.getElementsByClassName("faqPopup")[0].style.display = "none";
+  document.getElementsByClassName("endpointsPopup")[0].style.display = "none";
+
+  //set the classname of slots topNav to 'active'
   document.getElementsByClassName("slotsTopNav")[0].classList.add("active");
   document.getElementsByClassName("intentTopNav")[0].classList.remove("active");
+  document
+    .getElementsByClassName("actionsTopNav")[0]
+    .classList.remove("active");
+  document.getElementsByClassName("faqTopNav")[0].classList.remove("active");
   document
     .getElementsByClassName("endpointTopNav")[0]
     .classList.remove("active");

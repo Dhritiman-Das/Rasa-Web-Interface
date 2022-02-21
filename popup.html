@@ -7,6 +7,7 @@
     <title>Document</title>
     <script src="./intentsPopup.js" defer></script>
     <script src="./slotsPopup.js" defer></script>
+    <script src="./endpointsPopup.js" defer></script>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,6 +19,12 @@
         </div>
         <div class="popupLink">
             <div class="slotsTopNav" onclick="slotsActivated(this)">Slots</div>
+        </div>
+        <div class="popupLink">
+            <div class="actionsTopNav" onclick="actionsActivated(this)">Actions</div>
+        </div>
+        <div class="popupLink">
+            <div class="faqTopNav" onclick="faqActivated(this)">FAQs</div>
         </div>
         <div class="popupLink">
             <div class="endpointTopNav" onclick="endpointActivated(this)">Endpoint</div>
@@ -112,8 +119,27 @@
                 <button onclick="closeSlotsPopup(this)">DONE</button>
             </div>
         </div>
-        <div class="popup slotsPopup"></div>
-        <div class="popup endpointsPopup"></div>
+        <div class="popup endpointsPopup" style="display: none;">
+            <div class="endpointsValue">
+                <div class="databaseType">
+                    <div class="chooseDB">Choose DB: </div>
+                    <div class="optionsDB">
+                        <select id="selectDB" onclick="selectedDB(this)">
+                            <option value="Select" style="display:none;" selected>Select</option>
+                            <option value="mongoDB">Mongo DB</option>
+                            <option value="sql">SQL</option>
+                            <option value="redis">Redis</option>
+                            <option value="dynamo">Dynamo</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="databaseConfig">
+                    <!-- this is where the DB entries takes place -->
+                </div>
+            </div>
+        </div>
+        <div class="popup actionsPopup" style="display: none;"></div>
+        <div class="popup faqPopup" style="display: none;"></div>
     </div>
 </body>
 </html>
