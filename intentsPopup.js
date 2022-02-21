@@ -4,15 +4,26 @@ const intentsDB = {
     Positive: ["Yes", "Yup", "Sure"],
     Negative: ["No", "Never"],
   },
+  slots: {
+    appt_time: "22-02-2022",
+    creditScore: "700",
+  },
 };
 //activate Intent popup
 function intentActivated(x) {
   document.getElementsByClassName("intentPopup")[0].style.display = "block";
-  document.getElementsByClassName("intentTopNav")[0].className = "active";
+  document.getElementsByClassName("slotsPopup")[0].style.display = "none";
+  //add this for endpointsPopup also
+  document.getElementsByClassName("intentTopNav")[0].classList.add("active");
   document.getElementsByClassName("slotsTopNav")[0].classList.remove("active");
   document
     .getElementsByClassName("endpointTopNav")[0]
     .classList.remove("active");
+}
+//close intent popup
+function closeIntentPopup(x) {
+  document.getElementsByClassName("intentPopup")[0].style.display = "none";
+  document.getElementsByClassName("intentTopNav")[0].classList.remove("active");
 }
 
 for (var intent in intentsDB.intents) {
@@ -207,6 +218,6 @@ function makeTheIntentBlock(intent) {
   intentMain.append(intentHeader);
   intentMain.append(intentExamples);
 
-  document.getElementsByClassName("intentPopup")[0].append(intentMain);
+  document.getElementsByClassName("miniIntentPopup")[0].append(intentMain);
   // document.getElementsByClassName("intentPopup")[0].append(intentExamples);
 }

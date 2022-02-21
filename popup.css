@@ -31,12 +31,23 @@ input {
 .iconDiv {
   width: 15%;
 }
-.intentPopup {
+.intentPopup,
+.slotsPopup {
   width: 250px;
 }
-.addNewIntent {
-  text-align: right;
+.addNewIntent,
+.addSlotsIcon {
+  text-align: center;
 }
 .active {
   background-color: aquamarine;
+}
+.slotName {
+  width: 70%;
+}
+.removeSlot {
+  width: 20%;
+}
+.singleSlot {
+  display: flex;
 }
