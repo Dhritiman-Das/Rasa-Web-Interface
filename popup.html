@@ -25,54 +25,92 @@
     </div>
     <div class="popupDiv">
         <div class="popup intentPopup" style="display: none;">
-            <div class="addNewIntent">
-                <i class="fa fa-plus addNewIntentIcon" onclick="minMaxIntentForm(this)"></i>
+            <div class="miniIntentPopup">
+                <div class="addNewIntent">
+                    <i class="fa fa-plus addNewIntentIcon" onclick="minMaxIntentForm(this)"></i>
+                </div>
+                <div class="newIntentForm" style="display: none;">
+                    <div class="fillIntentName">
+                        <div class="">Intent Name :</div>
+                        <input type="text">
+                    </div>
+                    <div class="fillIntentExamples">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="submitIntentForm">
+                        <button onclick="submitIntentForm(this)">Done</button>
+                    </div>
+                </div>
+                <!-- <div class="intentMain">
+                    <div class="intentHeader">
+                        <div class="intentName">Intent Name</div>
+                        <div class="iconDiv"><i class="fa fa-angle-down showMore" onclick="maximizeMinimizeIntent(this)"></i></div>
+                        <div class="iconDiv"><i class="fa fa-trash deleteIntent" onclick="deleteIntentWhole(this)"></i></div>
+                    </div>
+                    <div class="intentExamples" style="display: none;">
+                        <div class="examples">
+                            <div class="singleExample">
+                                <div class="exampleName">Example Name 1</div>
+                                <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
+                            </div>
+                            <div class="singleExample">
+                                <div class="exampleName">Example Name 2</div>
+                                <div class="iconDiv"><i class="fa fa-trash deleteExample"></i></div>
+                            </div>
+                        </div>
+                        <div class="inputNewExample" style="display: none;">
+                            <div class="inputBox">
+                                <input type="text">
+                            </div>
+                            <div class="iconDiv">
+                                <i class="fa fa-check addExample" onclick="newExampleBlockDone(this)"></i>
+                            </div>
+                            <div class="iconDiv">
+                                <i class="fa fa-minus minimizeExample" onclick="newExampleBlockHide(this)"></i>
+                            </div>
+                        </div>
+                        <div class="addIntentExamples">
+                            <div class="AddMore"><button onclick="newExampleBlockShow(this)">ADD MORE</button></div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
-            <div class="newIntentForm" style="display: none;">
-                <div class="fillIntentName">
-                    <div class="">Intent Name :</div>
-                    <input type="text">
-                </div>
-                <div class="fillIntentExamples">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div class="submitIntentForm">
-                    <button onclick="submitIntentForm(this)">Done</button>
+            <div class="doneButton">
+                <button onclick="closeIntentPopup(this)">DONE</button>
+            </div>
+        </div>
+        <div class="popup slotsPopup" style="display: none;">
+            <div class="addSlotsIcon">
+                <i class="fa fa-plus" onclick="addNewSlot(this)"></i>
+            </div>
+            <div class="insertSlot">
+                <div class="newSlotForm" style="display: none;">
+                    <div class="fillSlotName">
+                        <div class="">Slot Name :</div>
+                        <input type="text">
+                    </div>
+                    <div class="submitSlotForm">
+                        <button onclick="submitSlotForm(this)">Done</button>
+                    </div>
                 </div>
             </div>
-            <!-- <div class="intentMain">
-                <div class="intentHeader">
-                    <div class="intentName">Intent Name</div>
-                    <div class="iconDiv"><i class="fa fa-angle-down showMore" onclick="maximizeMinimizeIntent(this)"></i></div>
-                    <div class="iconDiv"><i class="fa fa-trash deleteIntent" onclick="deleteIntentWhole(this)"></i></div>
-                </div>
-                <div class="intentExamples" style="display: none;">
-                    <div class="examples">
-                        <div class="singleExample">
-                            <div class="exampleName">Example Name 1</div>
-                            <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
-                        </div>
-                        <div class="singleExample">
-                            <div class="exampleName">Example Name 2</div>
-                            <div class="iconDiv"><i class="fa fa-trash deleteExample"></i></div>
-                        </div>
-                    </div>
-                    <div class="inputNewExample" style="display: none;">
-                        <div class="inputBox">
-                            <input type="text">
-                        </div>
-                        <div class="iconDiv">
-                            <i class="fa fa-check addExample" onclick="newExampleBlockDone(this)"></i>
-                        </div>
-                        <div class="iconDiv">
-                            <i class="fa fa-minus minimizeExample" onclick="newExampleBlockHide(this)"></i>
-                        </div>
-                    </div>
-                    <div class="addIntentExamples">
-                        <div class="AddMore"><button onclick="newExampleBlockShow(this)">ADD MORE</button></div>
+            <div class="slotsList">
+                <!-- <div class="singleSlot">
+                    <div class="slotName">Appt_date</div>
+                    <div class="removeSlot">
+                        <i class="fa fa-trash" onclick="deleteSlot(this)"></i>
                     </div>
                 </div>
-            </div> -->
+                <div class="singleSlot">
+                    <div class="slotName">Appt_time</div>
+                    <div class="removeSlot">
+                        <i class="fa fa-trash" onclick="deleteSlot(this)"></i>
+                    </div>
+                </div> -->
+            </div>
+            <div class="doneButton">
+                <button onclick="closeSlotsPopup(this)">DONE</button>
+            </div>
         </div>
         <div class="popup slotsPopup"></div>
         <div class="popup endpointsPopup"></div>
