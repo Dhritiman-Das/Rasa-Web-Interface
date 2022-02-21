@@ -51,3 +51,6 @@ input {
 .singleSlot {
   display: flex;
 }
+.endpointsValue {
+  width: 250px;
+}
