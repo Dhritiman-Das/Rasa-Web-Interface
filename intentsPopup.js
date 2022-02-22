@@ -8,6 +8,24 @@ const intentsDB = {
     appt_time: "22-02-2022",
     creditScore: "700",
   },
+  actions: {
+    utterenaces: {
+      utter_utterID1: "Great, which day works?",
+      utter_utterID2: "What is your credit Score?",
+    },
+    fillSlots: {
+      action_actionName1: {
+        slotName: "appt_time",
+        slotValueType: "Last Entity",
+        slotValue: "",
+      },
+      action_actionName2: {
+        slotName: "creditScore",
+        slotValueType: "Custom Value",
+        slotValue: "700",
+      },
+    },
+  },
 };
 //activate Intent popup
 function intentActivated(x) {

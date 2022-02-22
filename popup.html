@@ -130,7 +130,7 @@
                             <option value="sql">SQL</option>
                             <option value="redis">Redis</option>
                             <option value="dynamo">Dynamo</option>
-                          </select>
+                        </select>
                     </div>
                 </div>
                 <div class="databaseConfig">
@@ -138,7 +138,92 @@
                 </div>
             </div>
         </div>
-        <div class="popup actionsPopup" style="display: none;"></div>
+        <div class="popup actionsPopup" style="display: block;">
+            <!-- add new actions -->
+            <div class="actionsFillup">
+                <div class="addNewAction">
+                    <i class="fa fa-plus" onclick="addNewActions(this)"></i>
+                </div>
+                <div class="actionOptions">
+                    <select id="selectOption" onclick="selectedOption(this)">
+                        <option value="Select" style="display:none;" selected>Select</option>
+                        <option value="utterance">Utterance</option>
+                        <option value="slotFilling">Slot Filling</option>
+                        <option value="customAction">Custom Action</option>
+                    </select>
+                    <div class="utteranceDiv">
+                        <div class="addNewUtterance">
+                            <div>Utterance: </div>
+                            <div class="utteranceInput">
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="submitUtterance">
+                            <button onclick="submitUtterance(this)">DONE</button>
+                        </div>
+                    </div>
+                    <div class="addNewSlots">
+                        <div class="newSlotsDiv">
+                            <!-- 1st -->
+                            <div class="selectSlotName">
+                                <div>
+                                    Select Slot: 
+                                </div>
+                                <div class="slotOptions">
+                                    <select id="selectSlotOption" onclick="selectedSlotName(this)">
+                                        <option value="Select" style="display:none;" selected>Select</option>
+                                        <option value="appt_time">appt_time</option>
+                                        <option value="creditScore">creditScore</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 2nd -->
+                            <div class="selectEntityExtraction">
+                                <div>
+                                    Entity Extraction: 
+                                </div>
+                                <div class="entityExtractionOption">
+                                    <select id="selectEntityExtraction" onclick="entityExtractionMethod(this)">
+                                        <option value="Select" style="display:none;" selected>Select</option>
+                                        <option value="lastIntent">Extract from last intent</option>
+                                        <option value="customValue">Set a custom value</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 3rd -->
+                            <div class="selectEntityName">
+                                <div>
+                                    Entity: 
+                                </div>
+                                <div class="entityOptions">
+                                    <select id="selectEntityOption" onclick="selectedEntity(this)">
+                                        <option value="Select" style="display:none;" selected>Select</option>
+                                        <option value="time">Time</option>
+                                        <option value="money">Money</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submitSlots">
+                            <button onclick="submitSlots(this)">DONE</button>
+                        </div>
+                    </div>
+                    <div class="addNewCustomActions">
+                        <!-- Add new Custom Actions Code Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- display available actions from DB -->
+            <div class="displayUtterances">
+
+            </div>
+            <div class="displaySlots">
+
+            </div>
+            <div class="displayCustomActions">
+                
+            </div>
+        </div>
         <div class="popup faqPopup" style="display: none;"></div>
     </div>
 </body>
