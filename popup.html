@@ -8,6 +8,8 @@
     <script src="./intentsPopup.js" defer></script>
     <script src="./slotsPopup.js" defer></script>
     <script src="./endpointsPopup.js" defer></script>
+    <script src="./actionsPopup.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -138,20 +140,20 @@
                 </div>
             </div>
         </div>
-        <div class="popup actionsPopup" style="display: block;">
+        <div class="popup actionsPopup" style="display: none;">
             <!-- add new actions -->
             <div class="actionsFillup">
                 <div class="addNewAction">
                     <i class="fa fa-plus" onclick="addNewActions(this)"></i>
                 </div>
-                <div class="actionOptions">
+                <div class="actionOptions" style="display: none;">
                     <select id="selectOption" onclick="selectedOption(this)">
                         <option value="Select" style="display:none;" selected>Select</option>
                         <option value="utterance">Utterance</option>
                         <option value="slotFilling">Slot Filling</option>
                         <option value="customAction">Custom Action</option>
                     </select>
-                    <div class="utteranceDiv">
+                    <div class="utteranceDiv" style="display: none;">
                         <div class="addNewUtterance">
                             <div>Utterance: </div>
                             <div class="utteranceInput">
@@ -162,10 +164,10 @@
                             <button onclick="submitUtterance(this)">DONE</button>
                         </div>
                     </div>
-                    <div class="addNewSlots">
+                    <div class="addNewSlots" style="display: none;">
                         <div class="newSlotsDiv">
                             <!-- 1st -->
-                            <div class="selectSlotName">
+                            <!-- <div class="selectSlotName">
                                 <div>
                                     Select Slot: 
                                 </div>
@@ -176,9 +178,9 @@
                                         <option value="creditScore">creditScore</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- 2nd -->
-                            <div class="selectEntityExtraction">
+                            <!-- <div class="selectEntityExtraction">
                                 <div>
                                     Entity Extraction: 
                                 </div>
@@ -189,9 +191,9 @@
                                         <option value="customValue">Set a custom value</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- 3rd -->
-                            <div class="selectEntityName">
+                            <!-- <div class="selectEntityName" style="display: none;">
                                 <div>
                                     Entity: 
                                 </div>
@@ -202,7 +204,25 @@
                                         <option value="money">Money</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
+                            <!-- 4th -->
+                            <!-- <div class="fillSlotValue" style="display: none;">
+                                <div>
+                                    Slot Value : 
+                                </div>
+                                <div class="slotValue">
+                                    <input type="text">
+                                </div>
+                            </div> -->
+                            <!-- 5th -->
+                            <!-- <div class="saveAsSlot">
+                                <div>
+                                    Save As: 
+                                </div>
+                                <div class="saveAsSlotInput">
+                                    <input type="text">
+                                </div>
+                            </div> -->
                         </div>
                         <div class="submitSlots">
                             <button onclick="submitSlots(this)">DONE</button>
@@ -215,7 +235,32 @@
             </div>
             <!-- display available actions from DB -->
             <div class="displayUtterances">
-
+                <div class="utteranceHeader">
+                    <div>
+                        Utterance
+                    </div>
+                    <div class="iconDiv">
+                        <i class="fa fa-angle-down" onclick="maximizeMinimizeUtterance(this)"></i>
+                    </div>
+                </div>
+                <div class="allUtteranceBlock" style="display: none;">
+                    <!-- <div class="singleUtteranceBlock">
+                        <div class="singleUtterance">
+                            Great, which day works?
+                        </div>
+                        <div class="deleteUtterance iconDiv">
+                            <i class="fa fa-trash" onclick="deleteUtterance(this)"></i>
+                        </div>
+                    </div>
+                    <div class="singleUtteranceBlock">
+                        <div class="singleUtterance">
+                            What is your credit Score?
+                        </div>
+                        <div class="deleteUtterance iconDiv">
+                            <i class="fa fa-trash" onclick="deleteUtterance(this)"></i>
+                        </div>
+                    </div> -->
+                </div>
             </div>
             <div class="displaySlots">
 

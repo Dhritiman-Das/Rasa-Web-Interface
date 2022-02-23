@@ -45,6 +45,11 @@ function addNewSlot(x) {
 
 function deleteSlot(x) {
   x.parentElement.parentElement.remove();
+  //delete the entry from the DB
+  var slotName =
+    x.parentElement.parentElement.getElementsByClassName("slotName")[0]
+      .innerText;
+  delete slots[slotName];
 }
 //creating all the slots div from DB
 for (const singleSlots in slots) {

@@ -18,13 +18,18 @@ const intentsDB = {
         slotName: "appt_time",
         slotValueType: "Last Entity",
         slotValue: "",
+        saveAs: "id1",
       },
       action_actionName2: {
         slotName: "creditScore",
         slotValueType: "Custom Value",
         slotValue: "700",
+        saveAs: "id2",
       },
     },
+  },
+  entities: {
+    duckling: ["time", "number", "money"],
   },
 };
 //activate Intent popup
