@@ -31,12 +31,10 @@ input {
 .iconDiv {
   width: 15%;
 }
-.intentPopup,
-.slotsPopup {
-  width: 250px;
-}
 .addNewIntent,
-.addSlotsIcon {
+.addSlotsIcon,
+.addNewAction,
+.actionOptions {
   text-align: center;
 }
 .active {
@@ -53,4 +51,27 @@ input {
 }
 .endpointsValue {
   width: 250px;
+}
+.popupDiv {
+  width: 250px;
+}
+.displayUtterances,
+.displaySlots,
+.displayCustomActions {
+  /* text-align: center;
+  display: flex; */
+}
+.utteranceHeader,
+.slotFillingHeader {
+  display: flex;
+  justify-content: center;
+}
+.singleUtteranceBlock,
+.singleSlotFillingHeader {
+  display: flex;
+  justify-content: center;
+  background-color: bisque;
+}
+select {
+  width: 100%;
 }
