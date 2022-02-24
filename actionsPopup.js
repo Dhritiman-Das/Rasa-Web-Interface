@@ -3,6 +3,7 @@ var slotFillingClicked = false;
 var customActionsClicked = false;
 var entitiesList = intentsDB.entities.duckling;
 var utteranceList = intentsDB.actions.utterenaces;
+var slotFillingList = intentsDB.actions.fillSlots;
 function actionsActivated(x) {
   //open actions popup and close all other popups
   document.getElementsByClassName("actionsPopup")[0].style.display = "block";
@@ -146,7 +147,7 @@ function fetchAllSlotEntries() {
           <option value="Select" style="display:none;" selected>Select</option>`;
   for (var entity of entitiesList) {
     selectEntityNameInnerHTML += `
-    <option value="time">${entity}</option>
+    <option value="${entity}">${entity}</option>
     `;
   }
   selectEntityNameInnerHTML += `
@@ -205,8 +206,70 @@ function displayActionUtterances() {
     createSingleUtteranceBlock(utterance);
   }
 }
+function createSingleSlotFillingBlock(slotFillingID) {
+  var valueEntryMethod = slotFillingList[slotFillingID]["valueEntryMethod"];
+  var slotName = slotFillingList[slotFillingID]["slotName"];
+  var entityType = slotFillingList[slotFillingID]["entityType"];
+  var customValue = slotFillingList[slotFillingID]["slotValue"];
+  var saveAs = slotFillingList[slotFillingID]["saveAs"];
 
-function displayActionSlotFilling() {}
+  var singleSlotFillingAction = document.createElement("div");
+  singleSlotFillingAction.className = "singleSlotFillingAction";
+  singleSlotFillingActionInnerHTML = `
+  <div class="singleSlotFillingHeader">
+  <div class="singleSlotName ${slotFillingID}">
+      ${saveAs}
+  </div>
+  <div class="showMore iconDiv">
+      <i class="fa fa-eye" onclick="viewSlotInfo(this)"></i>
+  </div>
+  <div class="deleteSingleSLotFilling iconDiv">
+      <i class="fa fa-trash" onclick="deleteSingleSlotFilling(this)"></i>
+  </div>
+</div>
+<div class="singleSlotFillingInfo" style="display: none;">
+  <div class="infoSlotName">
+      <div class="infoKey">Slot Name: </div>
+      <div class="infoValue">${slotName}</div>
+  </div>
+  `;
+  if (valueEntryMethod == "lastIntent") {
+    singleSlotFillingActionInnerHTML += `
+    <div class="infoExtractionType">
+      <div class="infoKey">Extraction Type: </div>
+      <div class="infoValue">Extract from last intent</div>
+  </div>
+    <div class="entityType">
+      <div class="infoKey">Entity Type: </div>
+      <div class="infoValue">${entityType}</div>
+  </div>
+</div>
+    `;
+  } else if (valueEntryMethod == "customValue") {
+    singleSlotFillingActionInnerHTML += `
+    <div class="infoExtractionType">
+      <div class="infoKey">Extraction Type: </div>
+      <div class="infoValue">Set a custom value</div>
+  </div>
+    <div class="infoCustomValue">
+      <div class="infoKey">Custom Value: </div>
+      <div class="infoValue">${customValue}</div>
+  </div>
+</div>
+    `;
+  }
+  singleSlotFillingAction.innerHTML = singleSlotFillingActionInnerHTML;
+  document
+    .getElementsByClassName("allSlotFilledActions")[0]
+    .append(singleSlotFillingAction);
+  console.log(singleSlotFillingActionInnerHTML);
+}
+
+function displayActionSlotFilling() {
+  for (var slotFillingID in slotFillingList) {
+    createSingleSlotFillingBlock(slotFillingID);
+  }
+}
 
 function maximizeMinimizeUtterance(x) {
   if (x.classList.contains("fa-angle-down")) {
@@ -248,9 +311,9 @@ function submitUtterance(x) {
   //add the new utterance to the page
   createSingleUtteranceBlock(randomId);
 }
-
 function submitSlots(x) {
-  var slotInputType = x.parentElement.parentElement.getElementsByClassName(
+  var randomId = `action_fillslot_${generateID()}`;
+  var valueEntryMethod = x.parentElement.parentElement.getElementsByClassName(
     "selectEntityExtractionMethod"
   )[0].value;
   var slotName =
@@ -267,12 +330,85 @@ function submitSlots(x) {
     x.parentElement.parentElement.getElementsByClassName("saveAsSlotInput")[0]
       .children[0].value;
   //save to DB
-  if (slotInputType == "lastIntent") {
+  if (valueEntryMethod == "lastIntent") {
     //ommit customValue
-  } else if (slotInputType == "customValue") {
+    slotFillingList[randomId] = {
+      ["slotName"]: slotName,
+      ["valueEntryMethod"]: valueEntryMethod,
+      ["entityType"]: entityType,
+      ["slotValue"]: "",
+      ["saveAs"]: saveAs,
+    };
+  } else if (valueEntryMethod == "customValue") {
     //ommit entityType
+    slotFillingList[randomId] = {
+      ["slotName"]: slotName,
+      ["valueEntryMethod"]: valueEntryMethod,
+      ["entityType"]: "",
+      ["slotValue"]: customValue,
+      ["saveAs"]: saveAs,
+    };
+  }
+  //create HTML blocks
+  createSingleSlotFillingBlock(randomId);
+  //clear inputs
+  x.parentElement.parentElement.getElementsByClassName(
+    "selectSlotOption"
+  )[0].value = "Select";
+  x.parentElement.parentElement.getElementsByClassName(
+    "selectEntityExtractionMethod"
+  )[0].value = "Select";
+  x.parentElement.parentElement.getElementsByClassName(
+    "selectEntityOption"
+  )[0].value = "Select";
+  x.parentElement.parentElement.getElementsByClassName(
+    "slotValue"
+  )[0].children[0].value = "";
+  x.parentElement.parentElement.getElementsByClassName(
+    "saveAsSlotInput"
+  )[0].children[0].value = "";
+}
+
+function deleteSingleSlotFilling(x) {
+  x.parentElement.parentElement.remove();
+  //remove from DB
+  slotFillingID =
+    x.parentElement.parentElement.getElementsByClassName("singleSlotName")[0]
+      .classList[1];
+  delete slotFillingList[slotFillingID];
+}
+
+function maximizeMinimizeSlotFilling(x) {
+  if (x.classList.contains("fa-angle-down")) {
+    x.classList.remove("fa-angle-down");
+    x.classList.add("fa-angle-up");
+    x.parentElement.parentElement.parentElement.getElementsByClassName(
+      "allSlotFilledActions"
+    )[0].style.display = "block";
+  } else if (x.classList.contains("fa-angle-up")) {
+    x.classList.remove("fa-angle-up");
+    x.classList.add("fa-angle-down");
+    x.parentElement.parentElement.parentElement.getElementsByClassName(
+      "allSlotFilledActions"
+    )[0].style.display = "none";
+  }
+}
+function viewSlotInfo(x) {
+  if (x.classList.contains("fa-eye")) {
+    x.classList.remove("fa-eye");
+    x.classList.add("fa-eye-slash");
+    x.parentElement.parentElement.parentElement.getElementsByClassName(
+      "singleSlotFillingInfo"
+    )[0].style.display = "block";
+  } else if (x.classList.contains("fa-eye-slash")) {
+    x.classList.remove("fa-eye-slash");
+    x.classList.add("fa-eye");
+    x.parentElement.parentElement.parentElement.getElementsByClassName(
+      "singleSlotFillingInfo"
+    )[0].style.display = "none";
   }
 }
 
 fetchAllSlotEntries();
 displayActionUtterances();
+displayActionSlotFilling();

@@ -16,13 +16,15 @@ const intentsDB = {
     fillSlots: {
       action_actionName1: {
         slotName: "appt_time",
-        slotValueType: "Last Entity",
+        valueEntryMethod: "lastIntent",
+        entityType: "time",
         slotValue: "",
         saveAs: "id1",
       },
       action_actionName2: {
         slotName: "creditScore",
-        slotValueType: "Custom Value",
+        valueEntryMethod: "customValue",
+        entityType: "",
         slotValue: "700",
         saveAs: "id2",
       },
