@@ -106,7 +106,7 @@ function fetchAllSlotEntries() {
   `;
   for (var slot in slots) {
     slotsInnerHTML += `
-      <option value="appt_time">${slot}</option>
+      <option value="${slot}">${slot}</option>
       `;
   }
   slotsInnerHTML += `

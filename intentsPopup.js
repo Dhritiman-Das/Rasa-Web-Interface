@@ -1,8 +1,14 @@
 //Database replica
 const intentsDB = {
   intents: {
-    Positive: ["Yes", "Yup", "Sure"],
-    Negative: ["No", "Never"],
+    storyIntents: {
+      Positive: ["Yes", "Yup", "Sure"],
+      Negative: ["No", "Never"],
+    },
+    faqIntents: {
+      cost: ["Cost?", "What's the time?"],
+      availableTime: ["What time are you available?", "available time?"],
+    },
   },
   slots: {
     appt_time: "22-02-2022",
@@ -33,6 +39,16 @@ const intentsDB = {
   entities: {
     duckling: ["time", "number", "money"],
   },
+  faq: {
+    faq_id1: {
+      intents: ["Positive", "Negative"],
+      actions: ["utter_utterID1", "action_actionName1", "action_actionName2"],
+    },
+    faq_id2: {
+      intents: ["Positive"],
+      actions: ["utter_utterID2", "action_actionName2"],
+    },
+  },
 };
 //activate Intent popup
 function intentActivated(x) {
@@ -59,8 +75,12 @@ function closeIntentPopup(x) {
   document.getElementsByClassName("intentTopNav")[0].classList.remove("active");
 }
 
-for (var intent in intentsDB.intents) {
-  makeTheIntentBlock(intent);
+for (var intent in intentsDB.intents.storyIntents) {
+  makeTheIntentBlock(intent, "storyIntent");
+}
+for (var intent in intentsDB.intents.faqIntents) {
+  console.log("Intent is", intent);
+  makeTheIntentBlock(intent, "faqIntent");
 }
 
 function newExampleBlockShow(x) {
@@ -70,7 +90,7 @@ function newExampleBlockShow(x) {
   console.log(x.parentElement.parentElement.parentElement);
 }
 
-function newExampleBlockDone(x) {
+function newExampleBlockDone(x, intentKind) {
   x.parentElement.parentElement.parentElement.getElementsByClassName(
     "inputNewExample"
   )[0].style.display = "none";
@@ -102,7 +122,11 @@ function newExampleBlockDone(x) {
     //     "intentName"
     //   )[0].innerText
     // );
-    intentsDB.intents[intentName].push(newExampleValue);
+    if (intentKind == "storyIntent") {
+      intentsDB.intents.storyIntents[intentName].push(newExampleValue);
+    } else if (intentKind == "faqIntent") {
+      intentsDB.intents.faqIntents[intentName].push(newExampleValue);
+    }
   }
 }
 
@@ -133,10 +157,10 @@ function deleteIntentWhole(x) {
     x.parentElement.parentElement.parentElement.getElementsByClassName(
       "intentName"
     )[0].innerText;
-  delete intentsDB.intents[intentName];
+  delete intentsDB.intents.storyIntents[intentName];
   x.parentElement.parentElement.parentElement.remove();
 }
-function deleteIntentExample(x) {
+function deleteIntentExample(x, intentKind) {
   var intentName =
     x.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(
       "intentName"
@@ -144,9 +168,20 @@ function deleteIntentExample(x) {
   var intentExampleName =
     x.parentElement.parentElement.getElementsByClassName("exampleName")[0]
       .innerText;
-  var index = intentsDB.intents[intentName].indexOf(intentExampleName);
-  if (index > -1) {
-    intentsDB.intents[intentName].splice(index, 1);
+  if (intentKind == "storyIntent") {
+    var index =
+      intentsDB.intents.storyIntents[intentName].indexOf(intentExampleName);
+    if (index > -1) {
+      intentsDB.intents.storyIntents[intentName].splice(index, 1);
+    }
+  }
+  if (intentKind == "faqIntent") {
+    var index =
+      intentsDB.intents.faqIntents[intentName].indexOf(intentExampleName);
+    if (index > -1) {
+      intentsDB.intents.faqIntents[intentName].splice(index, 1);
+    }
+    console.log("removed");
   }
   console.log(intentName, intentExampleName, index);
   console.log(intentsDB);
@@ -170,6 +205,8 @@ function minMaxIntentForm(x) {
 }
 
 function submitIntentForm(x) {
+  var intentKind =
+    x.parentElement.parentElement.getElementsByClassName("intentKind")[0].value;
   var intentName =
     x.parentElement.parentElement.getElementsByClassName("fillIntentName")[0]
       .children[1].value;
@@ -178,12 +215,21 @@ function submitIntentForm(x) {
       "fillIntentExamples"
     )[0].children[0].value;
   var intentArr = convertTextToList(intentExampleText);
-  intentsDB.intents[intentName] = [];
-  for (var intentEx of intentArr) {
-    intentsDB.intents[intentName].push(intentEx);
+  if (intentKind == "storyIntent") {
+    intentsDB.intents.storyIntents[intentName] = [];
+    for (var intentEx of intentArr) {
+      intentsDB.intents.storyIntents[intentName].push(intentEx);
+    }
+    //To display the intent, create the HTML block. Another option is to reload the page, but that would take some time
+    makeTheIntentBlock(intentName, intentKind);
+  } else if (intentKind == "faqIntent") {
+    intentsDB.intents.faqIntents[intentName] = [];
+    for (var intentEx of intentArr) {
+      intentsDB.intents.faqIntents[intentName].push(intentEx);
+    }
+    //To display the intent, create the HTML block. Another option is to reload the page, but that would take some time
+    makeTheIntentBlock(intentName, intentKind);
   }
-  //To display the intent, create the HTML block. Another option is to reload the page, but that would take some time
-  makeTheIntentBlock(intentName);
   //clear the input and textarea
   x.parentElement.parentElement.getElementsByClassName(
     "fillIntentName"
@@ -191,6 +237,8 @@ function submitIntentForm(x) {
   x.parentElement.parentElement.getElementsByClassName(
     "fillIntentExamples"
   )[0].children[0].value = "";
+  x.parentElement.parentElement.getElementsByClassName("intentKind")[0].value =
+    "Select";
 }
 
 //basic functions
@@ -200,7 +248,8 @@ function convertTextToList(text) {
 }
 
 //This function takes in the intent name and creates the .intentMain div from the intentsDB
-function makeTheIntentBlock(intent) {
+//intentKind can be either 'storyIntent' or 'faqIntent'
+function makeTheIntentBlock(intent, intentKind) {
   var intentHeader = document.createElement("div");
   intentHeader.className = "intentHeader";
   var intentName = intent;
@@ -216,15 +265,28 @@ function makeTheIntentBlock(intent) {
   var examplesHTML = `
   <div class="examples">
   `;
-  for (var eg = 0; eg < intentsDB.intents[intent].length; eg++) {
-    var intentEg = intentsDB.intents[intent][eg];
-    console.log(intentEg);
-    examplesHTML += `
+  if (intentKind == "storyIntent") {
+    for (var eg = 0; eg < intentsDB.intents.storyIntents[intent].length; eg++) {
+      var intentEg = intentsDB.intents.storyIntents[intent][eg];
+      console.log(intentEg);
+      examplesHTML += `
     <div class="singleExample">
     <div class="exampleName">${intentEg}</div>
-    <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this)"></i></div>
+    <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this, '${intentKind}')"></i></div>
     </div>
     `;
+    }
+  } else if (intentKind == "faqIntent") {
+    for (var eg = 0; eg < intentsDB.intents.faqIntents[intent].length; eg++) {
+      var intentEg = intentsDB.intents.faqIntents[intent][eg];
+      console.log(intentEg);
+      examplesHTML += `
+    <div class="singleExample">
+    <div class="exampleName">${intentEg}</div>
+    <div class="iconDiv"><i class="fa fa-trash deleteExample" onclick="deleteIntentExample(this, '${intentKind}')"></i></div>
+    </div>
+    `;
+    }
   }
   examplesHTML += `
   </div>
@@ -233,7 +295,7 @@ function makeTheIntentBlock(intent) {
           <input type="text">
       </div>
       <div class="iconDiv">
-          <i class="fa fa-check addExample" onclick="newExampleBlockDone(this)"></i>
+          <i class="fa fa-check addExample" onclick="newExampleBlockDone(this,'${intentKind}')"></i>
       </div>
       <div class="iconDiv">
           <i class="fa fa-minus minimizeExample" onclick="newExampleBlockHide(this)"></i>
@@ -251,6 +313,10 @@ function makeTheIntentBlock(intent) {
   intentMain.append(intentHeader);
   intentMain.append(intentExamples);
 
-  document.getElementsByClassName("miniIntentPopup")[0].append(intentMain);
+  if (intentKind == "storyIntent") {
+    document.getElementsByClassName("storyIntentsDiv")[0].append(intentMain);
+  } else if (intentKind == "faqIntent") {
+    document.getElementsByClassName("faqIntentsDiv")[0].append(intentMain);
+  }
   // document.getElementsByClassName("intentPopup")[0].append(intentExamples);
 }
