@@ -45,10 +45,12 @@ function addNewSlot(x) {
 
 function deleteSlot(x) {
   x.parentElement.parentElement.remove();
-  //delete the entry from the DB
   var slotName =
     x.parentElement.parentElement.getElementsByClassName("slotName")[0]
       .innerText;
+  //delete the slot from the HTML options
+  deleteSlotOption(slotName);
+  //delete the entry from the DB
   delete slots[slotName];
 }
 //creating all the slots div from DB
@@ -56,6 +58,15 @@ for (const singleSlots in slots) {
   createSlotDiv(singleSlots);
 }
 
+//delete the slot from HTML options 'selectSlotOption'
+function deleteSlotOption(slotName) {
+  for (var options of document.getElementsByClassName("selectSlotOption")[0]
+    .children) {
+    if (options.innerText == slotName) {
+      options.remove();
+    }
+  }
+}
 function submitSlotForm(x) {
   var slotName =
     x.parentElement.parentElement.getElementsByClassName("fillSlotName")[0]
@@ -69,6 +80,11 @@ function submitSlotForm(x) {
     slots[slotName] = "";
     console.log(slots);
   }
+  //add the slot to the 'selectSlotOption' div
+  document.getElementsByClassName("selectSlotOption")[0].innerHTML += `
+  <option value="${slotName}">${slotName}</option>
+  `;
+  //add to the index.html story making popup too
 }
 
 //create the HTML for the slot Div

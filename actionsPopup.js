@@ -106,7 +106,7 @@ function fetchAllSlotEntries() {
   `;
   for (var slot in slots) {
     slotsInnerHTML += `
-      <option value="appt_time">${slot}</option>
+      <option value="${slot}">${slot}</option>
       `;
   }
   slotsInnerHTML += `
@@ -303,13 +303,20 @@ function submitUtterance(x) {
       .children[0].value;
   if (utteranceString.length > 0) {
     utteranceList[randomId] = utteranceString;
+    //append the utterance to the `utteranceOptgroup`
+    var utteranceOption = document.createElement("option");
+    utteranceOption.className = randomId;
+    utteranceOption.innerText = utteranceString;
+    document
+      .getElementsByClassName("utteranceOptgroup")[0]
+      .append(utteranceOption);
     //clear the input box
     x.parentElement.parentElement.getElementsByClassName(
       "utteranceInput"
     )[0].children[0].value = "";
+    //add the new utterance to the page
+    createSingleUtteranceBlock(randomId);
   }
-  //add the new utterance to the page
-  createSingleUtteranceBlock(randomId);
 }
 function submitSlots(x) {
   var randomId = `action_fillslot_${generateID()}`;
@@ -351,6 +358,13 @@ function submitSlots(x) {
   }
   //create HTML blocks
   createSingleSlotFillingBlock(randomId);
+  //append the slotFilled to the `slotFillingOptgroup`
+  var slotFilledOption = document.createElement("option");
+  slotFilledOption.className = randomId;
+  slotFilledOption.innerText = saveAs;
+  document
+    .getElementsByClassName("slotFillingOptgroup")[0]
+    .append(slotFilledOption);
   //clear inputs
   x.parentElement.parentElement.getElementsByClassName(
     "selectSlotOption"

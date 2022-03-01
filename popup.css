@@ -75,3 +75,19 @@ input {
 select {
   width: 100%;
 }
+.infoSlotName,
+.infoKey,
+.entityType,
+.infoExtractionType,
+.infoCustomValue {
+  display: flex;
+}
+.singleSlotFillingInfo {
+  background-color: antiquewhite;
+}
+.utteranceOptgroup > option {
+  background-color: aquamarine;
+}
+.slotFillingOptgroup > option {
+  background-color: rgb(241, 223, 226);
+}
