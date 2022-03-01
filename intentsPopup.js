@@ -318,5 +318,16 @@ function makeTheIntentBlock(intent, intentKind) {
   } else if (intentKind == "faqIntent") {
     document.getElementsByClassName("faqIntentsDiv")[0].append(intentMain);
   }
-  // document.getElementsByClassName("intentPopup")[0].append(intentExamples);
+  //add the new intent to 'selectFaqIntentOption' select tag
+  if (intentKind == "faqIntent") {
+    var selectFaqIntentOptionAll = document.getElementsByClassName(
+      "selectFaqIntentOption"
+    );
+    for (var optionTag of selectFaqIntentOptionAll) {
+      var option = document.createElement("option");
+      option.className = intent;
+      option.innerText = intent;
+      optionTag.append(option);
+    }
+  }
 }

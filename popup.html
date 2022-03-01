@@ -360,29 +360,31 @@
         </div>
         <div class="popup faqPopup" style="display: none;">
             <div class="addFaq">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus" onclick="addNewFaq(this)"></i>
             </div>
-            <div class="addFaqForm">
+            <div class="addFaqForm" style="display: none;">
                 <div class="selectFaqIntent">
                     <div class="chooseFaqIntent">
-                        <div>Intent: </div>
-                        <div class="faqIntentOptions">
-                            <select id="selectFaqIntentOption" onclick="selectedFaqIntent(this)">
-                                <option value="Select" style="display:none;" selected>Select</option>
-                                <option value="positive">Positive</option>
-                                <option value="negative">Negative</option>
-                            </select>
+                        <div class="singleFaqIntent">
+                            <div>Intent: </div>
+                            <div class="faqIntentOptions">
+                                <!-- <select class="selectFaqIntentOption" id="selectFaqIntentOption" onclick="selectedFaqIntent(this)">
+                                    <option value="Select" style="display:none;" selected>Select</option>
+                                    <option value="positive">Positive</option>
+                                    <option value="negative">Negative</option>
+                                </select> -->
+                            </div>
                         </div>
                     </div>
                     <div class="addMoreFaqIntent">
-                        <button>Add more</button>
+                        <button onclick="addMoreFaqIntent(this)">Add more</button>
                     </div>
                 </div>
                 <div class="selectFaqActions">
-                    <div class="singleFaqAction">
-                        <div>Action: </div>
+                    <div>Action: </div>
+                    <!-- <div class="singleFaqAction">
                         <div class="selectFaqAction">
-                            <select id="selectFaqIntentOption" onclick="selectedFaqIntent(this)">
+                            <select id="selectFaqIntentOption" onclick="selectedFaqAction(this)">
                                 <option value="Select" style="display:none;" selected>Select</option>
                                 <optgroup class="utteranceOptgroup" label="Utterances">
                                     <option value="utter_utterID1">Great, which day works?</option>
@@ -393,27 +395,26 @@
                                     <option value="action_actionName2">id2</option>
                                 </optgroup>
                                 <optgroup class="customActionsOptgroup" label="Custom Actions">
-                                    <!-- options for custom actions -->
                                 </optgroup>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="addMoreActions">
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-plus" onclick="addMoreFaqAction(this)"></i>
                 </div>
                 <div class="submitFaqForm">
-                    <button>Done</button>
+                    <button onclick="submitFaqForm(this)">Done</button>
                 </div>
             </div>
             <div class="faqList">
-                <table>
+                <table class="intentActionTableFaq">
                     <tr>
                         <th>Intent</th>
                         <th>Condition</th>
                         <th></th>
                     </tr>
-                    <tr>
+                    <tr class="faq_id1">
                         <td>
                             <div>Positive</div>
                             <div>Negative</div>
@@ -431,7 +432,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="faq_id2">
                         <td>
                             <div>Positive</div>
                         </td>
