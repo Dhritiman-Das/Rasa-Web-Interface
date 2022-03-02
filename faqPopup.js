@@ -1,5 +1,6 @@
 storyIntents = intentsDB.intents.storyIntents;
 faqIntents = intentsDB.intents.faqIntents;
+faqList = intentsDB.faq;
 function faqActivated(x) {
   //open actions popup and close all other popups
   document.getElementsByClassName("faqPopup")[0].style.display = "block";
@@ -109,9 +110,17 @@ function addMoreFaqAction(x) {
   createActionsListOption();
 }
 function submitFaqForm(x) {
+  var randomId = `faq_${generateID()}`;
   var faqIntentList = createFaqIntentList();
   var faqActionsList = createFaqActionsList();
-  console.log(faqIntentList);
+  //update the faq DB
+  faqList[randomId] = {};
+  faqList[randomId]["intents"] = [];
+  faqList[randomId]["actions"] = [];
+  faqList[randomId]["intents"] = faqIntentList;
+  faqList[randomId]["actions"] = faqActionsList;
+  //create a new table row
+  createfaqRow(randomId);
 }
 function createFaqIntentList() {
   var intentArr = [];
@@ -134,10 +143,72 @@ function createFaqActionsList() {
       // console.log(slotFillingList[actionID]);
       var actionName = slotFillingList[actionID]["saveAs"];
     }
-    actionsArr.push([actionID, actionName]);
+    // actionsArr.push([actionID, actionName]);
+    actionsArr.push(actionID);
   }
   console.log(actionsArr);
   return actionsArr;
 }
+function createfaqRow(faqID) {
+  var faqRow = document.createElement("tr");
+  faqRow.className = faqID;
+  //create the intent data in the table
+  var intentData = document.createElement("td");
+  intentData.className = "intentFaqData";
+  intentDataInnerHTML = "";
+  for (var intents of faqList[faqID]["intents"]) {
+    intentDataInnerHTML += `
+    <div>${intents}</div>
+    `;
+  }
+  intentData.innerHTML = intentDataInnerHTML;
+  //create the actions data in the table
+  var actionData = document.createElement("td");
+  actionData.className = "actionFaqData";
+  actionDataInnerHTML = "";
+  for (var action of faqList[faqID]["actions"]) {
+    if (action.includes("utter_")) {
+      //fetch utterance text
+      var toDisplay = utteranceList[action];
+      actionDataInnerHTML += `
+      <div><em>${toDisplay}</em></div>
+      `;
+    } else if (action.includes("action_")) {
+      //fetch action saveAs
+      var toDisplay = slotFillingList[action]["saveAs"];
+      actionDataInnerHTML += `
+      <div>${toDisplay}</div>
+      `;
+    }
+  }
+  actionData.innerHTML = actionDataInnerHTML;
+  //add the delete button
+  var deleteBtnData = document.createElement("td");
+  deleteBtnData.className = "deleteBtnData";
+  deleteBtnData.innerHTML = `
+  <div>
+    <i class="fa fa-trash" onclick="deleteFaqRow(this)"></i>
+  </div>
+  `;
+  //append all 3 datas to the table row
+  faqRow.append(intentData);
+  faqRow.append(actionData);
+  faqRow.append(deleteBtnData);
+  document
+    .getElementsByClassName("intentActionTableFaq")[0]
+    .children[0].append(faqRow);
+}
+function displayFaqSection() {
+  for (var faqID in faqList) {
+    createfaqRow(faqID);
+  }
+}
+function deleteFaqRow(x) {
+  var faqId = x.parentElement.parentElement.parentElement.className;
+  x.parentElement.parentElement.parentElement.remove();
+  //delete from DB
+  delete faqList[faqId];
+}
 createIntentListOption();
 createActionsListOption();
+displayFaqSection();
